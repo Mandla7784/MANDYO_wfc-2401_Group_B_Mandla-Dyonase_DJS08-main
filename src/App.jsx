@@ -8,7 +8,7 @@ import "./Server.js";
 function App() {
   return (
     <BrowserRouter>
-      <header>
+      <header className="site-header">
         <Link className="site-logo" to="/">
           #VanLife
         </Link>
