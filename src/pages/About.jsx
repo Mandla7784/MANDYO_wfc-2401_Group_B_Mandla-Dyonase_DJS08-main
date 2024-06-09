@@ -1,11 +1,11 @@
 import React from "react";
-import bgImg from "../assets/images/about-hero.png";
+// import bgImg from "./images/about-hero.jpg";
 import { Link } from "react-router-dom";
 
 export default function About() {
   return (
     <div className="about-page-container">
-      <img src={bgImg} className="about-hero-image" />
+      <img src="./images/about-hero.jpg" className="about-hero-image" />
       <div className="about-page-content">
         <h1>Don’t squeeze in a sedan when you could relax in a van.</h1>
         <p>
