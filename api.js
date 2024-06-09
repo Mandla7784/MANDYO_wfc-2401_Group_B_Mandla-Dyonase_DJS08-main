@@ -6,7 +6,6 @@ import {
   getDocs,
   getDoc,
   doc,
-  updateDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -31,5 +30,43 @@ export async function getVans() {
 
 export async function getVan(id) {
   const docRef = doc(db, "vans", id);
-  const snapShot = await getDoc();
+  const snapShot = await getDoc(docRef);
+
+  return {
+    ...snapShot.data(),
+    id: snapShot.id,
+  };
+}
+
+export async function getHostVans(id) {
+  const url = id ? `/api/host/vans/${id}` : "/api/host/vans";
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw {
+      message: "Failed to fetch vans",
+      statusText: res.statusText,
+      status: res.status,
+    };
+  }
+  const data = await res.json();
+  return data.vans;
+}
+
+export async function LoginUser(creds) {
+  const res = await fetch("/api/user/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(creds),
+  });
+  if (!res.ok) {
+    throw {
+      message: "Failed to login",
+      statusText: res.statusText,
+      status: res.status,
+    };
+  }
+  const data = await res.json();
+  return data.user;
 }
